@@ -32,37 +32,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: linear-gradient(180deg, #0057B7 0%, #003366 40%, #FFD700 100%);
+            /* ТУТ ТВОЙ ФОН (shahed.png с GitHub) */
+            background: url('https://raw.githubusercontent.com/SaDFFOX/shahed/main/shahed.png') center/cover no-repeat;
             border-bottom: 5px solid #222;
         }
 
-        /* Фоновые элементы (типа поля/города) */
-        .bg-layer {
+        /* Затемнение фона, чтобы анимация была виднее */
+        #hero::before {
+            content: '';
             position: absolute;
-            bottom: 0;
-            width: 200%;
-            height: 100%;
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); /* Заглушка, можно заменить */
-            background-repeat: repeat;
-            opacity: 0.2;
-            animation: scrollBg 20s linear infinite;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.2); 
+            z-index: 1;
         }
 
-        @keyframes scrollBg {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* ЗЕЛЕНСКИЙ (Летит) */
+        /* ЗЕЛЕНСКИЙ (gayphoto.png) */
         .zelensky {
             position: absolute;
-            width: 120px;
+            width: 150px;
+            max-width: 30vw;
             height: auto;
             z-index: 10;
-            bottom: 50%;
+            bottom: 40%;
             left: -200px;
             animation: flyZelensky 6s ease-in-out infinite;
             filter: drop-shadow(0 0 15px rgba(0,255,0,0.5));
+            object-fit: contain;
         }
 
         @keyframes flyZelensky {
@@ -72,22 +67,23 @@
             100% { left: 110%; bottom: 30%; transform: rotate(15deg) scale(1); }
         }
 
-        /* ШАХЕД (Дрон) */
-        .shahed {
+        /* ШАХЕД (dashahed.png) */
+        .shahed-drone {
             position: absolute;
-            width: 100px;
+            width: 120px;
+            max-width: 25vw;
             height: auto;
             z-index: 9;
             bottom: 50%;
             left: -300px;
             animation: flyShahed 6s ease-in-out infinite;
             filter: drop-shadow(0 0 10px rgba(255,0,0,0.8));
+            object-fit: contain;
         }
 
         @keyframes flyShahed {
             0% { left: -300px; bottom: 50%; transform: rotate(-10deg); }
             40% { left: 30%; bottom: 70%; transform: rotate(5deg); }
-            /* Догоняет и сбивает */
             50% { left: 47%; bottom: 58%; transform: scale(1.2) rotate(-45deg); opacity: 1; }
             55% { left: 50%; bottom: 50%; transform: scale(1.5) rotate(90deg); opacity: 0; }
             100% { left: 50%; bottom: 50%; transform: scale(1.5); opacity: 0; }
@@ -115,11 +111,12 @@
             100% { width: 300px; height: 300px; opacity: 0; }
         }
 
-        /* Заголовок поверх анимации */
-        .hero-title {
-            position: relative;
+        /* Заголовок */
+        .hero-bottom-text {
+            position: absolute;
+            bottom: 5%;
             z-index: 20;
-            font-size: 80px;
+            font-size: 40px;
             font-weight: 900;
             text-transform: uppercase;
             text-align: center;
@@ -189,7 +186,6 @@
             background: linear-gradient(45deg, #ff5722, #F44336);
         }
 
-        /* Футер */
         footer {
             text-align: center;
             padding: 20px;
@@ -198,11 +194,10 @@
             font-size: 14px;
         }
 
-        /* Адаптив */
         @media (max-width: 768px) {
-            .hero-title { font-size: 40px; }
-            .zelensky { width: 80px; }
-            .shahed { width: 70px; }
+            .hero-bottom-text { font-size: 24px; }
+            .zelensky { width: 100px; }
+            .shahed-drone { width: 80px; }
             .section-title { font-size: 32px; }
             .btn-download { font-size: 20px; padding: 15px 40px; }
         }
@@ -210,32 +205,28 @@
 </head>
 <body>
 
-    <!-- Главный экран с анимацией -->
     <section id="hero">
-        <div class="bg-layer"></div>
-        
-        <!-- Замени ссылки на свои картинки в папке pack -->
-        <img src="pack/gayphoto.png" alt="Зеленский" class="zelensky">
-        <img src="pack/shahed.png" alt="Шахед" class="shahed">
+        <!-- Зеленский и Шахед с твоего GitHub -->
+        <img src="https://raw.githubusercontent.com/SaDFFOX/shahed/main/gayphoto.png" alt="Зеленский" class="zelensky">
+        <img src="https://raw.githubusercontent.com/SaDFFOX/shahed/main/dashahed.png" alt="Шахед" class="shahed-drone">
         
         <div class="explosion"></div>
         
-        <h1 class="hero-title">Flappy<br>Zelenskiy</h1>
+        <h1 class="hero-bottom-text">Flappy Zelenskiy</h1>
     </section>
 
-    <!-- Секция скачивания -->
     <section id="download-section">
         <h2 class="section-title">Готов к взлёту?</h2>
         <p class="download-desc">Скачай игру, проверь свою реакцию и не дай шахеду догнать тебя. Обычный режим для новичков и HARD MODE для настоящих киберспортсменов.</p>
         
-        <!-- ССЫЛКУ ВСТАВЬ СЮДА -->
-        <a href="ССЫЛКА_НА_ТВОЙ_ФАЙЛ_ИЛИ_РЕЛИЗ_НА_ГИТХАБЕ" class="btn-download" target="_blank">
+        <!-- ВСТАВЬ СЮДА ССЫЛКУ НА СВОЙ РЕЛИЗ -->
+        <a href="#" class="btn-download" target="_blank">
             Скачать игру
         </a>
     </section>
 
     <footer>
-        Flappy Zelenskiy &copy; 2026. Сделано на Python & HTML.
+        Flappy Zelenskiy &copy; 2026.
     </footer>
 
 </body>
